@@ -103,12 +103,33 @@ nav.main li:hover .drop,nav.main li:focus-within .drop{display:block}
 .hdr-cta{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;line-height:1.2}
 .hdr-cta .ph{font-weight:700;font-size:1.15rem;white-space:nowrap}
 .hdr-cta small{color:var(--muted);font-size:.75rem}
-.burger{display:none;background:transparent;border:1.5px solid var(--line);border-radius:8px;padding:8px 12px;font:600 .9rem var(--f-body);color:var(--fg);cursor:pointer}
-.mnav{display:none;border-top:1px solid var(--line);background:var(--surface)}
+/* бургер и мобильное меню на весь экран */
+.burger{display:none;width:48px;height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;place-items:center;flex-shrink:0;padding:0}
+.burger span,.burger span::before,.burger span::after{display:block;width:22px;height:2.5px;border-radius:2px;background:currentColor;position:relative;content:""}
+.burger span::before{position:absolute;top:-7px}
+.burger span::after{position:absolute;top:7px}
+.mnav{display:none;position:fixed;inset:0;z-index:60;background:var(--surface);overflow-y:auto;overscroll-behavior:contain;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+body.nav-open{overflow:hidden}
+body.nav-open .mnav{display:block}
+.mnav-top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:76px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:1}
+.mnav-close{width:48px;height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;display:grid;place-items:center;padding:0;flex-shrink:0}
+.mnav-close svg{width:22px;height:22px}
+.mnav-body{display:grid;gap:0;padding-block:8px 0}
 .mnav details{border-bottom:1px solid var(--line)}
-.mnav summary{padding:14px 0;font-weight:600;cursor:pointer}
-.mnav a{display:block;padding:8px 0 8px 12px;text-decoration:none;color:var(--muted)}
-.mnav .solo{display:block;padding:14px 0;font-weight:600;color:var(--fg);border-bottom:1px solid var(--line)}
+.mnav summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:16px 0;font-weight:600;font-size:1.1rem;cursor:pointer}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin:-4px 6px 0 0;transition:transform .2s}
+.mnav details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.mnav details a{display:block;padding:10px 0 10px 14px;text-decoration:none;color:var(--muted);border-left:2px solid var(--line)}
+.mnav details[open]{padding-bottom:12px}
+.mnav .solo{display:block;padding:16px 0;font-weight:600;font-size:1.1rem;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line)}
+.mnav-contacts{display:grid;gap:4px;margin-top:22px;padding:18px;border-radius:var(--r);background:var(--sky-soft)}
+.mnav-contacts b{font-size:1.25rem}
+.mnav-contacts span{font-size:.85rem;color:var(--muted)}
+.mnav-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:18px;font-size:.85rem;color:var(--muted)}
+.mnav-tools .a11y button,.mnav-tools .theme-btn{border-color:var(--line);color:var(--fg);padding:8px 12px;font-size:.9rem}
+.mnav-tools .a11y button[aria-pressed="true"]{background:var(--fg);color:var(--surface)}
 
 /* ── hero ── */
 .hero{background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%);position:relative;overflow:hidden}
@@ -320,10 +341,9 @@ footer a:hover{color:var(--on-ink)}
 /* ── адаптив ── */
 @media (max-width:1100px){
   nav.main{display:none}
-  .burger{display:inline-block}
+  .burger{display:grid}
   header.top .wrap{justify-content:space-between}
   .hdr-cta{margin-left:auto}
-  body.nav-open .mnav{display:block}
   .prod-grid{grid-template-columns:repeat(3,1fr)}
   .cases{grid-template-columns:repeat(2,1fr)}
   .steps{grid-template-columns:1fr 1fr 1fr}
@@ -344,8 +364,9 @@ footer a:hover{color:var(--on-ink)}
 }
 @media (max-width:640px){
   .sec{padding-block:44px}
-  .util .addr{display:none}
+  .util{display:none}
   .hdr-cta{display:none}
+  header.top .wrap{min-height:72px}
   .logo{font-size:17px}
   .facts{grid-template-columns:1fr 1fr}
   .facts div:nth-child(3){padding-left:0;border-left:0}
@@ -456,15 +477,38 @@ footer a:hover{color:var(--on-ink)}
       <span class="ph num">(4212) 747-393</span>
       <small>8 800 555 39 09 — единый справочный центр</small>
     </div>
-    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="mnav">Меню</button>
+    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Открыть меню"><span></span></button>
   </div>
-  <div class="mnav" id="mnav">
+  <div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Меню">
     <div class="wrap">
-      <details><summary>Фонд</summary><a href="#about">О фонде</a><a href="#about">Отчёты</a><a href="#about">Документы</a></details>
-      <details><summary>Предпринимателям</summary><a href="#products">Продукты фонда</a><a href="#terms">Условия и стоимость</a><a href="#steps">Порядок получения</a><a href="#products">Банки-партнёры</a></details>
-      <details><summary>Партнёрам и отборы</summary><a href="#partners">Депозиты</a><a href="#partners">Отбор банков</a><a href="#partners">Аудиторским организациям</a></details>
-      <a class="solo" href="#news">Новости</a>
-      <a class="solo" href="#contacts">Контакты</a>
+      <div class="mnav-top">
+        <a class="logo" href="#top" style="font-size:17px"><svg aria-hidden="true"><use href="#emblem"/></svg><span class="wm"><span class="l1">Гарантийный</span><span class="l2">фонд</span><span class="l3">Хабаровского края</span></span></a>
+        <button type="button" class="mnav-close" id="mnav-close" aria-label="Закрыть меню"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+      </div>
+      <nav class="mnav-body" aria-label="Мобильное меню">
+        <details><summary>Предпринимателям</summary><a href="#products">Продукты фонда</a><a href="#terms">Условия и стоимость</a><a href="#terms">Кому не выдаётся</a><a href="#steps">Порядок получения</a><a href="#products">Банки-партнёры</a></details>
+        <details><summary>Фонд</summary><a href="#about">О Гарантийном фонде</a><a href="#about">Отчёты о деятельности</a><a href="#about">СМИ о фонде</a><a href="#about">Документы</a></details>
+        <details><summary>Партнёрам</summary><a href="#partners">Размещение средств в депозиты</a><a href="#partners">Порядок отбора банков</a></details>
+        <details><summary>Отборы</summary><a href="#partners">Финансовым организациям</a><a href="#partners">Аудиторским организациям</a></details>
+        <a class="solo" href="#news">Новости</a>
+        <a class="solo" href="#cases">Наши клиенты</a>
+        <a class="solo" href="#faq">Вопрос — ответ</a>
+        <a class="solo" href="#contacts">Контакты</a>
+      </nav>
+      <div class="mnav-contacts">
+        <b class="num">(4212) 747-393, 757-393</b>
+        <span class="num">8 800 555 39 09 — единый справочный центр</span>
+        <span>ул. Запарина, 51 · Пн–Пт 9:00–18:00, обед 13–14</span>
+      </div>
+      <div class="mnav-tools">
+        <span>Шрифт</span>
+        <div class="a11y" role="group" aria-label="Размер шрифта">
+          <button type="button" id="mfs-s" data-fs="14" aria-label="Мельче">A−</button>
+          <button type="button" id="mfs-m" data-fs="16" aria-pressed="true" aria-label="Обычный">A</button>
+          <button type="button" id="mfs-l" data-fs="19" aria-label="Крупнее">A+</button>
+        </div>
+        <button type="button" class="theme-btn" id="mtheme-btn">Тема</button>
+      </div>
     </div>
   </div>
 </header>
@@ -814,20 +858,27 @@ footer a:hover{color:var(--on-ink)}
 
   document.querySelectorAll('.a11y button').forEach(b=>b.addEventListener('click',()=>{
     document.documentElement.style.setProperty('--fs',b.dataset.fs+'px');
-    document.querySelectorAll('.a11y button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    document.querySelectorAll('.a11y button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.fs===b.dataset.fs));
     try{localStorage.setItem('gf-fs',b.dataset.fs)}catch(e){}
   }));
   try{const f=localStorage.getItem('gf-fs');if(f){const b=document.querySelector('.a11y [data-fs="'+f+'"]');b&&b.click()}}catch(e){}
 
-  $('theme-btn').addEventListener('click',()=>{
+  document.querySelectorAll('.theme-btn').forEach(btn=>btn.addEventListener('click',()=>{
     const r=document.documentElement, cur=r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
     r.dataset.theme=cur==='dark'?'light':'dark';
-  });
+  }));
 
-  $('burger').addEventListener('click',()=>{
-    const o=document.body.classList.toggle('nav-open'); $('burger').setAttribute('aria-expanded',o);
-  });
+  const openNav=o=>{
+    document.body.classList.toggle('nav-open',o); $('burger').setAttribute('aria-expanded',o);
+    if(o)$('mnav-close').focus(); else $('burger').focus({preventScroll:true});
+  };
+  $('burger').addEventListener('click',()=>openNav(true));
+  $('mnav-close').addEventListener('click',()=>openNav(false));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('nav-open'))openNav(false)});
   document.querySelectorAll('.mnav a').forEach(a=>a.addEventListener('click',()=>{document.body.classList.remove('nav-open');$('burger').setAttribute('aria-expanded','false')}));
+  // в меню открыт только один раздел
+  document.querySelectorAll('.mnav details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)document.querySelectorAll('.mnav details').forEach(x=>{if(x!==d)x.open=false})}));
+  addEventListener('resize',()=>{if(innerWidth>1100&&document.body.classList.contains('nav-open'))openNav(false)});
 
   $('copy-mail').addEventListener('click',()=>{
     const t=$('mail').textContent, b=$('copy-mail');
