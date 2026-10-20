@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Гарантийный фонд Хабаровского края</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Roboto+Condensed:wght@600;700&family=PT+Sans:wght@700&display=swap">
+<style>
+/* Портал: светлая «бумага» с холодным оттенком, глубокий сине-бирюзовый из старого подвала как основной,
+   ленты логотипа (голубой / зелёный / жёлтый) — только акценты, песочный из старого меню — тёплая нота. */
+:root{
+  --ink:#173a4b;        /* фирменный тёмный (старый подвал) */
+  --ink-2:#22495c;
+  --sky:#0796c9;        /* голубая лента логотипа, затемнена для контраста */
+  --sky-soft:#e3f3fa;
+  --leaf:#4ea532;       /* зелёная лента */
+  --sun:#e2d20e;        /* жёлтая лента */
+  --sand:#c08c5e;       /* песочный из старой шапки */
+  --sand-soft:#f6ece2;
+  --bg:#f3f6f7;
+  --surface:#ffffff;
+  --fg:#1b2a31;
+  --muted:#5b6d76;
+  --line:#dbe3e7;
+  --on-ink:#ffffff;
+  --on-ink-muted:#b9cbd3;
+  --focus:#0796c9;
+  --f-display:"Roboto Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Golos Text","Segoe UI",Roboto,Arial,sans-serif;
+  --r:10px;
+  --wrap:1200px;
+  --fs:16px;
+  /* цвета логотипа — как в оригинале, в обеих темах */
+  --logo-c:#17b2e3;
+  --logo-y:#dcd820;
+  --logo-g:#34a845;
+  --logo-text:#3b3b3b;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#0e2a37;--ink-2:#173a4b;--sky:#3cbbe8;--sky-soft:#12313d;--leaf:#6cc24d;--sun:#e8da2a;
+  --sand:#d6a77c;--sand-soft:#2b241d;--bg:#0b1a21;--surface:#11242d;--fg:#e4edf1;--muted:#9bb0ba;
+  --line:#21404d;--on-ink:#ffffff;--on-ink-muted:#a9bec8;--focus:#3cbbe8;--logo-text:#eef3f5;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ink:#0e2a37;--ink-2:#173a4b;--sky:#3cbbe8;--sky-soft:#12313d;--leaf:#6cc24d;--sun:#e8da2a;
+  --sand:#d6a77c;--sand-soft:#2b241d;--bg:#0b1a21;--surface:#11242d;--fg:#e4edf1;--muted:#9bb0ba;
+  --line:#21404d;--on-ink:#ffffff;--on-ink-muted:#a9bec8;--focus:#3cbbe8;--logo-text:#eef3f5;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{font-size:var(--fs)}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:1rem;line-height:1.55;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;color:var(--sky)}
+.sec{padding-block:64px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-top:6px}
+.more{font-weight:600;color:var(--sky);text-decoration:none;white-space:nowrap}
+.more:hover{text-decoration:underline}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 1rem/1 var(--f-body);padding:14px 22px;border-radius:999px;border:0;cursor:pointer;text-decoration:none}
+.btn-main{background:var(--sky);color:#fff}
+.btn-main:hover{filter:brightness(1.08)}
+.btn-ghost{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--sky)}
+
+/* ── верхняя строка ── */
+.util{background:var(--ink);color:var(--on-ink-muted);font-size:.85rem}
+.util .wrap{display:flex;gap:20px;align-items:center;min-height:40px;flex-wrap:wrap;padding-block:6px}
+.util b{color:var(--on-ink);font-weight:600}
+.util .sp{flex:1}
+.a11y{display:flex;gap:4px;align-items:center}
+.a11y button{background:transparent;border:1px solid var(--ink-2);color:var(--on-ink);border-radius:6px;cursor:pointer;font:600 .8rem var(--f-body);padding:3px 8px}
+.a11y button[aria-pressed="true"]{background:var(--on-ink);color:var(--ink)}
+.theme-btn{background:transparent;border:1px solid var(--ink-2);color:var(--on-ink);border-radius:6px;cursor:pointer;padding:3px 8px;font:600 .8rem var(--f-body)}
+
+/* ── шапка ── */
+header.top{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+header.top .wrap{display:flex;align-items:center;gap:24px;min-height:84px}
+/* логотип: пропорции оригинала — эмблема по высоте равна блоку надписи, надпись в три строки по центру */
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;font-size:22px}
+.logo svg{height:2.35em;width:4.3em;flex-shrink:0}
+.logo .wm{font-family:"PT Sans",var(--f-body);font-weight:700;text-transform:uppercase;line-height:1;color:var(--logo-text);text-align:center;display:flex;flex-direction:column;align-items:center}
+.wm .l1,.wm .l2{font-size:1em;letter-spacing:-.005em}
+.wm .l3{font-size:.66em;letter-spacing:.005em;margin-top:.12em}
+footer .logo{--logo-text:#fff}
+nav.main{flex:1;display:flex;justify-content:center}
+nav.main>ul{list-style:none;margin:0;padding:0;display:flex;gap:4px}
+nav.main>ul>li{position:relative}
+nav.main>ul>li>a{display:block;padding:30px 12px;font-weight:500;text-decoration:none;border-bottom:3px solid transparent}
+nav.main>ul>li:hover>a,nav.main>ul>li:focus-within>a{border-bottom-color:var(--sand);color:var(--ink)}
+:root[data-theme="dark"] nav.main>ul>li:hover>a{color:var(--fg)}
+.drop{position:absolute;top:100%;left:-12px;min-width:300px;background:var(--surface);border:1px solid var(--line);border-radius:0 0 var(--r) var(--r);box-shadow:0 18px 40px rgba(10,40,55,.14);padding:10px;display:none;list-style:none;margin:0}
+nav.main li:hover .drop,nav.main li:focus-within .drop{display:block}
+.drop a{display:block;padding:9px 12px;border-radius:6px;text-decoration:none;font-size:.95rem}
+.drop a:hover{background:var(--sky-soft)}
+.drop .grp{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 12px 4px;font-weight:600}
+.hdr-cta{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;line-height:1.2}
+.hdr-cta .ph{font-weight:700;font-size:1.15rem;white-space:nowrap}
+.hdr-cta small{color:var(--muted);font-size:.75rem}
+.burger{display:none;background:transparent;border:1.5px solid var(--line);border-radius:8px;padding:8px 12px;font:600 .9rem var(--f-body);color:var(--fg);cursor:pointer}
+.mnav{display:none;border-top:1px solid var(--line);background:var(--surface)}
+.mnav details{border-bottom:1px solid var(--line)}
+.mnav summary{padding:14px 0;font-weight:600;cursor:pointer}
+.mnav a{display:block;padding:8px 0 8px 12px;text-decoration:none;color:var(--muted)}
+.mnav .solo{display:block;padding:14px 0;font-weight:600;color:var(--fg);border-bottom:1px solid var(--line)}
+
+/* ── hero ── */
+.hero{background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;padding-block:56px 64px;position:relative;z-index:1}
+.hero-ribbons{position:absolute;inset:auto -10% -40px -10%;height:260px;pointer-events:none;opacity:.5}
+.hero h1{font-size:clamp(2rem,4.4vw,3.3rem);font-weight:700;letter-spacing:-.01em;margin:14px 0 18px}
+.hero h1 em{font-style:normal;color:var(--sky)}
+.hero .lead{font-size:1.15rem;color:var(--muted);max-width:34em}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts div{padding:16px 16px 16px 0}
+.facts div+div{padding-left:16px;border-left:1px solid var(--line)}
+.facts b{display:block;font-family:var(--f-display);font-size:1.9rem;font-weight:700;color:var(--ink);line-height:1.1}
+:root[data-theme="dark"] .facts b{color:var(--fg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .facts b{color:var(--fg)}}
+.facts span{font-size:.85rem;color:var(--muted)}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.mb-badge{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);background:var(--sand-soft);border-radius:999px;padding:6px 14px 6px 8px}
+.mb-badge i{width:22px;height:22px;border-radius:50%;background:var(--sand);display:inline-grid;place-items:center;color:#fff;font-style:normal;font-weight:700;font-size:.75rem}
+
+/* калькулятор */
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 60px rgba(10,40,55,.10);padding:28px;align-self:start;min-width:0}
+.calc h2{font-size:1.35rem;margin-bottom:4px}
+.calc .sub{color:var(--muted);font-size:.9rem;margin-bottom:20px}
+.field{display:grid;gap:6px;margin-bottom:16px}
+.field label{font-size:.85rem;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.field label output{font-weight:700;color:var(--sky)}
+.field input[type=range]{width:100%;accent-color:var(--sky)}
+.field select{font:inherit;padding:10px 12px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);width:100%}
+.res{background:var(--ink);color:var(--on-ink);border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin-top:6px}
+.res div span{display:block;font-size:.78rem;color:var(--on-ink-muted)}
+.res div b{font-size:1.25rem;font-weight:700}
+.res .wide{grid-column:1/-1;border-top:1px solid var(--ink-2);padding-top:12px}
+.res .wide b{font-size:1.6rem;color:var(--sun)}
+.calc .note{font-size:.78rem;color:var(--muted);margin-top:12px}
+
+/* ── маршруты ── */
+.routes{margin-top:-8px}
+.routes .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.route{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;text-decoration:none;display:flex;flex-direction:column;gap:8px;transition:border-color .2s, transform .2s}
+.route:hover{border-color:var(--sky);transform:translateY(-2px)}
+.route h3{font-size:1.1rem}
+.route p{color:var(--muted);font-size:.9rem}
+.route .ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--sky-soft);color:var(--sky)}
+.route .ic svg{width:22px;height:22px}
+.route.svo{background:var(--sand-soft);border-color:transparent}
+.route.svo .ic{background:var(--sand);color:#fff}
+
+/* ── обязательные баннеры, свёрстанные кодом ── */
+.pos{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin-bottom:16px}
+.pos .gu{font:700 1rem/1 var(--f-body);color:#fff;background:#0d4cd3;border-radius:8px;padding:10px 12px;white-space:nowrap}
+.pos .gu small{display:block;font-weight:500;font-size:.7rem;opacity:.85;margin-top:4px}
+.pos h3{font-size:1.05rem}
+.pos p{color:var(--muted);font-size:.9rem}
+.pos .btn{padding:11px 20px;background:#0d4cd3;color:#fff}
+.stats{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-top:16px;overflow:hidden}
+.stats .cap{padding:20px 22px;background:var(--sky-soft);display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0}
+.stats .cap b{font-family:var(--f-display);font-size:1.1rem;text-transform:uppercase;letter-spacing:.04em}
+.stats .cap span{font-size:.82rem;color:var(--muted)}
+.stat{padding:20px 22px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:6px;min-width:0}
+.stat b{font-family:var(--f-display);font-size:2.2rem;line-height:1;font-weight:700}
+.stat span{font-size:.85rem;color:var(--muted)}
+.stat .bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.stat .bar i{display:block;height:100%;border-radius:3px}
+.banners{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+.bn{border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:10px;text-decoration:none;position:relative;overflow:hidden;min-width:0}
+.bn h3{font-size:1.15rem;line-height:1.25}
+.bn p{font-size:.9rem}
+.bn .go{margin-top:auto;font-weight:700;font-size:.9rem}
+.bn-svo{background:#3b4a2c;color:#f3f1e6}
+.bn-svo .site{font-family:var(--f-display);font-size:1.7rem;font-weight:700;color:#f2c84b}
+.bn-svo ul{list-style:none;margin:0;padding:0;display:flex;gap:6px 16px;flex-wrap:wrap;font-size:.88rem}
+.bn-svo ul li::before{content:"✓ ";color:#f2c84b}
+.bn-svo .tels{display:flex;gap:10px;flex-wrap:wrap}
+.bn-svo .tels span{background:rgba(255,255,255,.12);border-radius:999px;padding:4px 12px;font-weight:700}
+.bn-svo .go{align-self:flex-start;background:#f2c84b;color:#2a2a1a;border-radius:999px;padding:9px 18px}
+.bn-guide{background:var(--ink);color:var(--on-ink)}
+.bn-guide p{color:var(--on-ink-muted)}
+.bn-guide .go{color:var(--sun)}
+.bn-guide .doc{position:absolute;right:-18px;bottom:-22px;width:120px;height:150px;border-radius:8px;background:var(--ink-2);transform:rotate(-8deg)}
+.bn-guide .doc::after{content:"PDF";position:absolute;left:14px;top:14px;font:700 .8rem var(--f-body);color:var(--sun)}
+.orgs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:16px}
+.org{background:var(--surface);padding:18px 20px;display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:center;text-decoration:none}
+.org:hover{background:var(--sky-soft)}
+.org .mk{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font:700 .85rem var(--f-display);color:#fff}
+.org b{display:block;font-size:.92rem;line-height:1.3}
+.org span{font-size:.8rem;color:var(--muted)}
+.np{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 12px 5px 6px;background:var(--surface)}
+.np i{width:20px;height:20px;border-radius:4px;background:#e2495d;clip-path:polygon(0 0,100% 0,100% 70%,0 100%)}
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ── продукты ── */
+.prod-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.prod{background:var(--surface);padding:22px 18px;display:flex;flex-direction:column;gap:10px;min-height:150px}
+.prod .tag{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--leaf)}
+.prod h3{font-size:1rem;font-weight:600}
+.prod a{margin-top:auto;font-size:.85rem;color:var(--sky);text-decoration:none;font-weight:600}
+
+/* ── шаги ── */
+.steps-band{background:var(--ink);color:var(--on-ink)}
+.steps-band .eyebrow{color:var(--sun)}
+.steps-band .sec-head h2{color:var(--on-ink)}
+.steps-band .sec-head p{color:var(--on-ink-muted);max-width:34em}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;counter-reset:s}
+.steps li{position:relative;padding-top:56px;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;top:0;left:0;width:40px;height:40px;border-radius:50%;border:2px solid var(--sky);display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:1.1rem;color:var(--on-ink)}
+.steps li::after{content:"";position:absolute;top:20px;left:48px;right:-12px;height:2px;background:var(--ink-2)}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:1.02rem;margin-bottom:6px}
+.steps p{color:var(--on-ink-muted);font-size:.9rem}
+.steps .hl{display:inline-block;margin-top:8px;background:var(--sun);color:#1b2a31;font-weight:700;font-size:.8rem;padding:3px 10px;border-radius:999px}
+
+/* ── тарифы и требования ── */
+.terms{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:start}
+.tariffs{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tariff{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:20px 22px;border-top:1px solid var(--line)}
+.tariff:first-child{border-top:0}
+.tariff .rate{font-family:var(--f-display);font-weight:700;font-size:2rem;line-height:1;color:var(--ink)}
+:root[data-theme="dark"] .tariff .rate{color:var(--fg)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tariff .rate{color:var(--fg)}}
+.tariff .rate small{display:block;font-family:var(--f-body);font-weight:500;font-size:.72rem;color:var(--muted);margin-top:6px}
+.tariff h3{font-size:1rem;margin-bottom:4px}
+.tariff p{font-size:.88rem;color:var(--muted)}
+.tariff.t1 .rate{color:var(--leaf)}
+.chk{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.chk li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:.93rem}
+.chk li::before{content:"";width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--leaf);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0a10 10 0 100 20 10 10 0 000-20zm-1.4 14.2L4.4 10l1.4-1.4 2.8 2.8 5.6-5.6 1.4 1.4-7 7z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0a10 10 0 100 20 10 10 0 000-20zm-1.4 14.2L4.4 10l1.4-1.4 2.8 2.8 5.6-5.6 1.4 1.4-7 7z'/%3E%3C/svg%3E") center/contain no-repeat}
+.chk.no li::before{background:var(--sand);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0a10 10 0 100 20 10 10 0 000-20zm4 12.6L12.6 14 10 11.4 7.4 14 6 12.6 8.6 10 6 7.4 7.4 6 10 8.6 12.6 6 14 7.4 11.4 10z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0a10 10 0 100 20 10 10 0 000-20zm4 12.6L12.6 14 10 11.4 7.4 14 6 12.6 8.6 10 6 7.4 7.4 6 10 8.6 12.6 6 14 7.4 11.4 10z'/%3E%3C/svg%3E") center/contain no-repeat}
+.req h3{font-size:1.05rem;margin:0 0 14px}
+.req .block+.block{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+
+/* ── истории ── */
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:14px}
+.case h3{font-size:1rem;line-height:1.3}
+.case .what{font-size:.88rem;color:var(--muted)}
+.case dl{margin:auto 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:.88rem;padding-top:14px;border-top:1px dashed var(--line)}
+.case dt{color:var(--muted)}
+.case dd{margin:0;font-weight:600;text-align:right}
+
+/* ── новости ── */
+.news-wrap{display:grid;grid-template-columns:1.4fr .6fr;gap:32px;align-items:start}
+.news{display:grid;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.news a{display:grid;grid-template-columns:96px 1fr;gap:20px;padding:20px 22px;text-decoration:none;border-top:1px solid var(--line)}
+.news a:first-child{border-top:0}
+.news a:hover h3{color:var(--sky)}
+.news time{font-size:.82rem;color:var(--muted);line-height:1.3}
+.news time b{display:block;font-family:var(--f-display);font-size:1.6rem;color:var(--fg);line-height:1}
+.news h3{font-size:1.02rem;font-weight:600;margin-bottom:4px}
+.news p{font-size:.9rem;color:var(--muted)}
+.pill{display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:999px;background:var(--sky-soft);color:var(--sky);margin-bottom:6px}
+.pill.sel{background:var(--sand-soft);color:var(--sand)}
+.mb{background:var(--ink);color:var(--on-ink);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:14px}
+.mb h3{font-size:1.25rem}
+.mb p{color:var(--on-ink-muted);font-size:.92rem}
+.mb .ph{font-family:var(--f-display);font-size:1.7rem;font-weight:700;color:var(--sun)}
+.mb ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.9rem}
+.mb li{padding-left:16px;position:relative}
+.mb li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--sky)}
+.side-links{margin-top:16px;display:grid;gap:8px}
+.side-links a{display:flex;justify-content:space-between;gap:8px;padding:14px 18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;font-weight:600;font-size:.93rem}
+.side-links a:hover{border-color:var(--sky)}
+
+/* ── партнёрам ── */
+.partners{background:var(--sand-soft)}
+.partners .eyebrow{color:var(--sand)}
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.p-card{background:var(--surface);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:10px;text-decoration:none}
+.p-card h3{font-size:1.08rem}
+.p-card p{color:var(--muted);font-size:.9rem}
+.p-card .go{margin-top:auto;color:var(--sky);font-weight:600;font-size:.9rem}
+
+/* ── вопросы ── */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 40px 18px 0;font-weight:600;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:12px;font-size:1.6rem;font-weight:400;color:var(--sky);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 18px;color:var(--muted);max-width:60ch}
+.faq aside p{color:var(--muted);margin-top:12px}
+
+/* ── контакты ── */
+.contacts{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.c-info{padding:32px;display:grid;gap:22px;align-content:start}
+.c-info h2{font-size:1.8rem}
+.c-row{display:grid;grid-template-columns:130px 1fr;gap:12px;font-size:.95rem}
+.c-row span{color:var(--muted)}
+.c-row b{font-weight:600}
+.copy{background:transparent;border:1px solid var(--line);border-radius:6px;font:500 .75rem var(--f-body);color:var(--muted);padding:2px 8px;cursor:pointer;margin-left:6px}
+.social{display:flex;gap:8px;flex-wrap:wrap}
+.social a{padding:8px 14px;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-weight:600;font-size:.85rem}
+.social a:hover{border-color:var(--sky);color:var(--sky)}
+.map{position:relative;background:var(--sky-soft);min-height:340px;display:grid;place-items:center;text-decoration:none;overflow:hidden}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.map .pin{position:relative;z-index:1;background:var(--surface);border-radius:12px;padding:14px 18px;box-shadow:0 12px 30px rgba(10,40,55,.18);text-align:center}
+.map .pin b{display:block}
+.map .pin span{font-size:.85rem;color:var(--sky);font-weight:600}
+
+/* ── подвал ── */
+footer{background:var(--ink);color:var(--on-ink-muted);font-size:.88rem;margin-top:64px}
+footer .wrap{padding-block:44px 28px}
+.f-grid{display:grid;grid-template-columns:1.3fr repeat(3,1fr);gap:32px}
+footer h4{color:var(--on-ink);font-size:.95rem;margin:0 0 12px}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--on-ink)}
+.f-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--ink-2);margin-top:32px;padding-top:20px;font-size:.8rem}
+
+/* ── адаптив ── */
+@media (max-width:1100px){
+  nav.main{display:none}
+  .burger{display:inline-block}
+  header.top .wrap{justify-content:space-between}
+  .hdr-cta{margin-left:auto}
+  body.nav-open .mnav{display:block}
+  .prod-grid{grid-template-columns:repeat(3,1fr)}
+  .cases{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr 1fr 1fr}
+  .steps li::after{display:none}
+}
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr}
+  .routes .grid{grid-template-columns:1fr 1fr}
+  .terms,.news-wrap,.faq,.contacts{grid-template-columns:1fr}
+  .p-grid{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats .cap{grid-column:1/-1}
+  .stat:nth-child(2){border-left:0}
+  .stat:nth-child(4){grid-column:1/-1;border-left:0;border-top:1px solid var(--line)}
+  .banners{grid-template-columns:1fr}
+  .orgs{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .sec{padding-block:44px}
+  .util .addr{display:none}
+  .hdr-cta{display:none}
+  .logo{font-size:17px}
+  .facts{grid-template-columns:1fr 1fr}
+  .facts div:nth-child(3){padding-left:0;border-left:0}
+  .facts div:nth-child(n+3){border-top:1px solid var(--line)}
+  .prod-grid,.routes .grid,.cases,.steps{grid-template-columns:1fr}
+  .prod{min-height:0}
+  .tariff{grid-template-columns:1fr;gap:8px}
+  .news a{grid-template-columns:1fr;gap:6px}
+  .news time b{display:inline;font-size:1rem}
+  .c-row{grid-template-columns:1fr;gap:2px}
+  .c-info{padding:22px}
+  .calc{padding:20px}
+  .res{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr}
+  .pos{grid-template-columns:1fr;gap:12px}
+  .pos .gu{justify-self:start}
+  .pos .btn{justify-self:start}
+  .stats{grid-template-columns:1fr}
+  .stat{border-left:0;border-top:1px solid var(--line)}
+  .stat:nth-child(4){grid-column:auto}
+  .orgs{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<!-- эмблема: ленты логотипа, перерисованные вектором -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="emblem" viewBox="0 1 141 77">
+      <g style="fill:var(--logo-c)">
+        <path d="M0.5 74C0.5 74 10 63.9 10 63.9C12.9 61.1 15.3 59 18 57.1C20.7 55.2 23.3 53.9 26 52.4C28.7 50.9 31.3 49.6 34 48.3C36.7 47 39.3 45.6 42 44.6C44.7 43.5 47.3 42.8 50 42C52.7 41.2 55.3 40 58 39.8C60.7 39.7 63.3 39.6 66 40.8C68.7 42.1 72.3 45.9 74 47.2C75.7 48.5 75.6 47.1 76 48.7C76.4 50.3 76.8 55.4 76.5 56.5C76.3 57.7 76.2 56.5 74.5 55.8C72.8 55.1 69.2 52.9 66.5 52.3C63.8 51.7 61.2 52.2 58.5 52.3C55.8 52.4 53.2 52.5 50.5 53C47.8 53.5 45.2 54.4 42.5 55.4C39.8 56.5 37.2 58 34.5 59.3C31.8 60.6 29.2 61.8 26.5 63.2C23.8 64.5 21.2 66.2 18.5 67.4C15.8 68.7 13.5 69.7 10.5 70.8C10.5 70.8 0.5 74 0.5 74Z"/>
+        <path d="M63 23C64.3 22.6 68.3 25.3 71 26.1C73.7 26.9 76.3 27.5 79 27.7C81.7 27.9 84.3 27.8 87 27.4C89.7 27 92.3 26 95 25.1C97.7 24.2 100.3 23.2 103 22.1C105.7 21 108.3 19.8 111 18.4C113.7 17 116.3 15.3 119 13.8C121.7 12.4 124.3 11 127 9.7C129.7 8.3 132.8 6.4 135 5.6C135 5.6 140 5.1 140 5.1C140 5.1 135.5 8.1 135.5 8.1C133.4 10.3 130.2 15.9 127.5 18.6C124.8 21.3 122.2 22.4 119.5 24.2C116.8 25.9 114.2 27.5 111.5 28.9C108.8 30.3 106.2 31.4 103.5 32.6C100.8 33.8 98.2 35.1 95.5 36C92.8 36.9 90.2 37.8 87.5 38.2C84.8 38.5 82.2 38.7 79.5 38.3C76.8 37.9 74.2 37.7 71.5 36C68.8 34.3 64.9 30.5 63.5 28.3C62.1 26.1 61.8 23.3 63 23Z"/>
+        <path d="M72 2C66.5 6 65 14 67 22C69.5 18.5 73 16 76 14C76.5 9 75 5 72 2Z"/>
+        <path d="M68 59C67.5 66 69 71.5 72 76.5C76 72.5 79.5 68 79 63.5C75.5 61.5 71.5 60 68 59Z"/>
+      </g>
+      <g style="fill:var(--logo-y)">
+        <path d="M14.5 50.6C14.5 50.6 22 43.6 22 43.6C24.3 41.7 26 40.4 28 39.1C30 37.9 32 37.1 34 36.1C36 35.2 38 34.2 40 33.4C42 32.6 44 32 46 31.4C48 30.8 50 30 52 29.8C54 29.7 56 29.7 58 30.3C60 30.8 62.5 32.6 64 33.3C65.5 34 66.4 33.6 67 34.5C67.6 35.3 67.9 37.7 67.5 38.3C67.1 38.9 66 38.3 64.5 38.2C63 38 60.5 37.3 58.5 37.3C56.5 37.3 54.5 37.6 52.5 37.9C50.5 38.2 48.5 38.5 46.5 39C44.5 39.5 42.5 40.3 40.5 41C38.5 41.8 36.5 42.6 34.5 43.6C32.5 44.5 30.5 45.8 28.5 46.7C26.5 47.7 24.8 48.6 22.5 49.3C22.5 49.3 14.5 50.6 14.5 50.6Z"/>
+        <path d="M72 40.5C72.9 40.1 76 41.5 78 41.7C80 41.9 82 41.8 84 41.7C86 41.6 88 41.4 90 41C92 40.6 94 39.9 96 39.3C98 38.6 100 37.8 102 37C104 36.2 106 35.3 108 34.3C110 33.3 112 31.9 114 31C116 30 118 29 120 28.6C120 28.6 126 28.1 126 28.1C126 28.1 120.5 32.6 120.5 32.6C118.6 34.4 116.5 37.2 114.5 38.7C112.5 40.3 110.5 41 108.5 42C106.5 43 104.5 44 102.5 44.9C100.5 45.7 98.5 46.4 96.5 47C94.5 47.6 92.5 48.1 90.5 48.3C88.5 48.5 86.5 48.5 84.5 48.3C82.5 48.1 80.5 48 78.5 47.3C76.5 46.6 73.6 45.2 72.5 44C71.4 42.9 71.1 40.8 72 40.5Z"/>
+        <path d="M74 19.5L78 25.5L74.5 24Z"/>
+        <path d="M63.5 53.5L67.5 57.5L66 54Z"/>
+      </g>
+      <g style="fill:var(--logo-g)">
+        <path d="M27.5 31.8C27.5 31.8 33 27.6 33 27.6C34.6 26.5 35.7 25.5 37 24.8C38.3 24.1 39.7 23.9 41 23.4C42.3 23 43.7 22.4 45 22.1C46.3 21.8 47.7 21.7 49 21.7C50.3 21.7 51.7 21.7 53 21.8C54.3 22 55.7 22.4 57 22.8C58.3 23.3 60.2 24 61 24.3C61.8 24.6 61.8 24 62 24.5C62.3 25 62.6 26.8 62.5 27.3C62.4 27.8 62.3 27.3 61.5 27.3C60.7 27.3 58.8 27.3 57.5 27.3C56.2 27.3 54.8 27.3 53.5 27.3C52.2 27.3 50.8 27.4 49.5 27.6C48.2 27.8 46.8 28 45.5 28.3C44.2 28.6 42.8 29 41.5 29.4C40.2 29.9 38.8 30.6 37.5 31.2C36.2 31.7 35.2 32.4 33.5 32.5C33.5 32.5 27.5 31.8 27.5 31.8Z"/>
+        <path d="M79 51.7C79.6 51.2 81.7 52.1 83 52.3C84.3 52.4 85.7 52.6 87 52.6C88.3 52.5 89.7 52.2 91 52C92.3 51.8 93.7 51.6 95 51.3C96.3 50.9 97.7 50.4 99 50C100.3 49.5 101.7 49.1 103 48.6C104.3 48 105.7 47.3 107 46.9C108.3 46.6 109.8 46.4 111 46.5C111 46.5 114 47.3 114 47.3C114 47.3 111.5 48.7 111.5 48.7C110.4 49.6 108.8 51.6 107.5 52.5C106.2 53.5 104.8 53.9 103.5 54.4C102.2 55 100.8 55.3 99.5 55.7C98.2 56.1 96.8 56.6 95.5 56.9C94.2 57.1 92.8 57.3 91.5 57.3C90.2 57.3 88.8 57.3 87.5 57.2C86.2 57 84.8 56.5 83.5 56.2C82.2 55.8 80.3 55.8 79.5 55C78.8 54.3 78.4 52.2 79 51.7Z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="util">
+  <div class="wrap">
+    <span class="addr">г. Хабаровск, ул. Запарина, 51</span>
+    <span>Пн–Пт <b class="num">9:00–18:00</b>, обед 13–14</span>
+    <span class="sp"></span>
+    <div class="a11y" role="group" aria-label="Размер шрифта">
+      <button type="button" id="fs-s" data-fs="14" aria-label="Мельче">A−</button>
+      <button type="button" id="fs-m" data-fs="16" aria-pressed="true" aria-label="Обычный">A</button>
+      <button type="button" id="fs-l" data-fs="19" aria-label="Крупнее">A+</button>
+    </div>
+    <button type="button" class="theme-btn" id="theme-btn">Тема</button>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Гарантийный фонд Хабаровского края — на главную">
+      <svg aria-hidden="true"><use href="#emblem"/></svg>
+      <span class="wm"><span class="l1">Гарантийный</span><span class="l2">фонд</span><span class="l3">Хабаровского края</span></span>
+    </a>
+    <nav class="main" aria-label="Главное меню">
+      <ul>
+        <li><a href="#about">Фонд</a>
+          <ul class="drop">
+            <li><a href="#about">О Гарантийном фонде</a></li>
+            <li><a href="#about">Отчёты о деятельности</a></li>
+            <li><a href="#about">СМИ о фонде</a></li>
+            <li><a href="#about">Документы</a></li>
+          </ul></li>
+        <li><a href="#products">Предпринимателям</a>
+          <ul class="drop">
+            <li><a href="#products">Продукты фонда</a></li>
+            <li><a href="#terms">Условия и стоимость</a></li>
+            <li><a href="#terms">Кому не выдаётся поручительство</a></li>
+            <li><a href="#steps">Порядок получения</a></li>
+            <li class="grp">Банки и организации-партнёры</li>
+            <li><a href="#products">По кредитным договорам</a></li>
+            <li><a href="#products">По банковской гарантии</a></li>
+            <li><a href="#products">По лизингу</a></li>
+            <li><a href="#products">По займам</a></li>
+          </ul></li>
+        <li><a href="#partners">Партнёрам</a>
+          <ul class="drop">
+            <li><a href="#partners">Размещение средств фонда в депозиты</a></li>
+            <li><a href="#partners">Порядок отбора банков</a></li>
+          </ul></li>
+        <li><a href="#news">Отборы</a>
+          <ul class="drop">
+            <li><a href="#partners">Финансовым организациям</a></li>
+            <li><a href="#partners">Аудиторским организациям</a></li>
+          </ul></li>
+        <li><a href="#news">Новости</a></li>
+        <li><a href="#cases">Клиенты</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="hdr-cta">
+      <span class="ph num">(4212) 747-393</span>
+      <small>8 800 555 39 09 — единый справочный центр</small>
+    </div>
+    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="mnav">Меню</button>
+  </div>
+  <div class="mnav" id="mnav">
+    <div class="wrap">
+      <details><summary>Фонд</summary><a href="#about">О фонде</a><a href="#about">Отчёты</a><a href="#about">Документы</a></details>
+      <details><summary>Предпринимателям</summary><a href="#products">Продукты фонда</a><a href="#terms">Условия и стоимость</a><a href="#steps">Порядок получения</a><a href="#products">Банки-партнёры</a></details>
+      <details><summary>Партнёрам и отборы</summary><a href="#partners">Депозиты</a><a href="#partners">Отбор банков</a><a href="#partners">Аудиторским организациям</a></details>
+      <a class="solo" href="#news">Новости</a>
+      <a class="solo" href="#contacts">Контакты</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <svg class="hero-ribbons" viewBox="0 0 1200 260" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 170 C200 90 380 230 600 150 S1000 40 1200 70" style="fill:none;stroke:var(--sky);stroke-width:26;opacity:.16"/>
+    <path d="M0 210 C200 130 380 270 600 190 S1000 80 1200 110" style="fill:none;stroke:var(--leaf);stroke-width:26;opacity:.14"/>
+    <path d="M0 250 C200 170 380 300 600 230 S1000 120 1200 150" style="fill:none;stroke:var(--sun);stroke-width:20;opacity:.22"/>
+  </svg>
+  <div class="wrap">
+    <div>
+      <div class="badges">
+        <span class="mb-badge"><i>М</i>Объект инфраструктуры «Мой бизнес»</span>
+        <span class="np"><i></i>Национальный проект «Экономика»</span>
+      </div>
+      <h1>Не хватает залога для кредита? <em>Фонд станет поручителем</em></h1>
+      <p class="lead">Поручительство фонда закрывает часть залога, которого банк ждёт от малого и среднего бизнеса. Работаем по кредитам, банковским гарантиям, лизингу и займам.</p>
+      <div class="facts">
+        <div><b class="num">70%</b><span>от суммы финансирования</span></div>
+        <div><b class="num">100 млн ₽</b><span>максимум поручительства</span></div>
+        <div><b class="num">10 лет</b><span>предельный срок</span></div>
+        <div><b class="num">от 0,25%</b><span>годовых — стоимость</span></div>
+      </div>
+      <div class="hero-btns">
+        <a class="btn btn-main" href="#steps">Как получить поручительство</a>
+        <a class="btn btn-ghost" href="#products">Банки-партнёры</a>
+      </div>
+    </div>
+
+    <form class="calc" id="calc" aria-labelledby="calc-h" novalidate>
+      <h2 id="calc-h">Сколько стоит поручительство</h2>
+      <p class="sub">Предварительный расчёт вознаграждения фонда</p>
+      <div class="field">
+        <label for="c-sum">Сумма кредита <output id="o-sum" class="num"></output></label>
+        <input type="range" id="c-sum" min="1" max="150" step="0.5" value="15">
+      </div>
+      <div class="field">
+        <label for="c-share">Доля поручительства <output id="o-share" class="num"></output></label>
+        <input type="range" id="c-share" min="10" max="70" step="5" value="50">
+      </div>
+      <div class="field">
+        <label for="c-term">Срок <output id="o-term" class="num"></output></label>
+        <input type="range" id="c-term" min="6" max="120" step="6" value="36">
+      </div>
+      <div class="field">
+        <label for="c-cat">Категория заёмщика</label>
+        <select id="c-cat">
+          <option value="0.75">Стандартная ставка — 0,75%</option>
+          <option value="0.5">Производство, туризм, IT, экспорт и др. — 0,5%</option>
+          <option value="0.25">Начинающие, соцпредприниматели, участники СВО — 0,25%</option>
+          <option value="1">Без залога — 1,0%</option>
+        </select>
+      </div>
+      <div class="res" aria-live="polite">
+        <div><span>Сумма поручительства</span><b id="r-g" class="num">—</b></div>
+        <div><span>Вознаграждение в год</span><b id="r-y" class="num">—</b></div>
+        <div class="wide"><span>Ориентировочно за весь срок</span><b id="r-t" class="num">—</b></div>
+      </div>
+      <p class="note">Расчёт ориентировочный. Точную сумму фонд называет по заявке, которую передаёт банк.</p>
+    </form>
+  </div>
+</section>
+
+<section class="sec routes" aria-label="Быстрый переход">
+  <div class="wrap">
+    <div class="pos" role="region" aria-label="Обратная связь через Госуслуги">
+      <span class="gu">Госуслуги<small>Решаем вместе</small></span>
+      <div><h3>Возникли трудности при ведении бизнеса в регионе?</h3><p>Напишите через Госуслуги, чтобы быстро получить ответ.</p></div>
+      <a class="btn" href="https://pos.gosuslugi.ru/" target="_blank" rel="noopener">Написать</a>
+    </div>
+    <div class="grid">
+      <a class="route" href="#products">
+        <span class="ic"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></span>
+        <h3>Предпринимателям</h3><p>Продукты фонда, условия, порядок получения поручительства</p>
+      </a>
+      <a class="route" href="#partners">
+        <span class="ic"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2"><path d="M3 10h18M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18M12 3l9 5H3z"/></svg></span>
+        <h3>Банкам и партнёрам</h3><p>Отбор банков, размещение средств фонда в депозиты</p>
+      </a>
+      <a class="route" href="#about">
+        <span class="ic"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg></span>
+        <h3>Документы и отчёты</h3><p>Устав, порядок предоставления поручительств, отчёты о деятельности</p>
+      </a>
+      <a class="route svo" href="#terms">
+        <span class="ic"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></span>
+        <h3>Участникам СВО</h3><p>Поручительство за 0,25% годовых и сервисы поддержки семей</p>
+      </a>
+    </div>
+    <div class="stats" role="region" aria-label="Наши достижения">
+      <div class="cap"><b>Наши достижения</b><span>январь — сентябрь 2026</span></div>
+      <div class="stat"><b class="num">181</b><span>договор поручительства заключён</span></div>
+      <div class="stat"><b class="num">1 277 <small style="font-size:.5em">млн ₽</small></b><span>поручительств выдано субъектам МСП</span></div>
+      <div class="stat"><b class="num">4 105 <small style="font-size:.5em">млн ₽</small></b><span>кредитов получено под поручительство фонда</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="products" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Продукты фонда</span><h2>Поручительство под вашу задачу</h2></div>
+      <a class="more" href="#products">Банки-партнёры по каждому продукту →</a>
+    </div>
+    <div class="prod-grid">
+      <article class="prod"><span class="tag">Кредит</span><h3>На инвестиции</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">Кредит</span><h3>На пополнение оборотных средств</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">Кредит</span><h3>Рефинансирование действующего кредита или займа</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">Кредит</span><h3>Согарантия с Корпорацией МСП</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">Гарантия</span><h3>По банковским гарантиям</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">Лизинг</span><h3>По договорам лизинга</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">Самозанятым</span><h3>Для физлиц на налоге на профессиональный доход</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">Старт</span><h3>Для начинающих предпринимателей</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">АПК</span><h3>Для сельхозтоваропроизводителей</h3><a href="#terms">Условия</a></article>
+      <article class="prod"><span class="tag">Залог</span><h3>Под залог прав на интеллектуальную собственность</h3><a href="#terms">Условия</a></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec steps-band" id="steps">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Порядок получения</span><h2>Заявку в фонд подаёт банк</h2></div>
+      <p>Предпринимателю не нужно отдельно идти в фонд: достаточно сказать банку, что нужен поручитель.</p>
+    </div>
+    <ol class="steps">
+      <li><h3>Обращаетесь в банк</h3><p>Выбираете кредит или гарантию по программе банка-партнёра фонда.</p></li>
+      <li><h3>Банк одобряет, но залога мало</h3><p>Банк сам предлагает оформить поручительство Гарантийного фонда.</p></li>
+      <li><h3>Банк передаёт заявку</h3><p>Не позднее 2 рабочих дней после вашего согласия.</p></li>
+      <li><h3>Фонд принимает решение</h3><p>Письменно уведомляет банк и предпринимателя.</p><span class="hl">до 3 рабочих дней</span></li>
+      <li><h3>Подписываете договор</h3><p>Трёхсторонний: банк — предприниматель — фонд. В день подписания оплачиваете вознаграждение.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="terms">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Условия и стоимость</span><h2>Сколько стоит и кому подходит</h2></div>
+      <a class="more" href="#about">Порядок предоставления поручительств (PDF) →</a>
+    </div>
+    <div class="terms">
+      <div class="tariffs">
+        <div class="tariff t1"><div class="rate num">0,25%<small>годовых</small></div><div><h3>Льготная ставка</h3><p>Начинающим предпринимателям (до 2 лет с регистрации), социальным предпринимателям, участникам СВО, малым технологичным компаниям из реестра края, бизнесу в моногородах, спортивным организациям (ОКВЭД 93.1).</p></div></div>
+        <div class="tariff"><div class="rate num">0,5%<small>годовых</small></div><div><h3>Приоритетные отрасли</h3><p>Сельское хозяйство, обрабатывающие производства, транспорт, гостиницы и общепит, IT и связь, кино, туризм. Также обладателям бренда «Сделано в Хабаровском крае», креативным индустриям и экспортёрам.</p></div></div>
+        <div class="tariff"><div class="rate num">0,75%<small>годовых</small></div><div><h3>Стандартная ставка</h3><p>Для остальных субъектов МСП Хабаровского края.</p></div></div>
+        <div class="tariff"><div class="rate num">1,0%<small>годовых</small></div><div><h3>Без залога</h3><p>Если предприниматель не предоставляет банку собственного залога.</p></div></div>
+      </div>
+      <div class="req">
+        <div class="block">
+          <h3>Кто может получить</h3>
+          <ul class="chk">
+            <li>Субъект МСП по 209-ФЗ, зарегистрированный в Хабаровском крае</li>
+            <li>Нет налоговой задолженности свыше 50 тыс. ₽ в течение 30 дней до договора</li>
+            <li>Нет долгов по зарплате больше трёх месяцев</li>
+            <li>Нет процедур банкротства, лицензия действует</li>
+            <li>Положительная кредитная история</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>Кому не выдаётся</h3>
+          <ul class="chk no">
+            <li>Компаниям в стадии ликвидации или реорганизации</li>
+            <li>Игорному бизнесу</li>
+            <li>Банкам, страховым, инвестфондам, НПФ, ломбардам, участникам рынка ценных бумаг</li>
+            <li>При неполном пакете документов или недостоверных сведениях</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cases" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Наши клиенты</span><h2>Кому фонд уже помог</h2></div>
+      <a class="more" href="#cases">Все истории →</a>
+    </div>
+    <div class="cases">
+      <article class="case"><h3>ООО «Метрикс»</h3><p class="what">Производство и торговля электротехникой и кабельной продукцией по всему Дальнему Востоку. Кредит на оборотные средства.</p>
+        <dl class="num"><dt>Сумма</dt><dd>15 000 000 ₽</dd><dt>Срок</dt><dd>36 мес.</dd><dt>Ставка</dt><dd>0,5%</dd><dt>Банк</dt><dd>Примсоцбанк</dd></dl></article>
+      <article class="case"><h3>ООО «Альфа-Заслон»</h3><p class="what">Охранная организация, на рынке с 2003 года: физическая и пультовая охрана, монтаж систем. Кредит на текущие расходы.</p>
+        <dl class="num"><dt>Сумма</dt><dd>7 500 000 ₽</dd><dt>Срок</dt><dd>36 мес.</dd><dt>Ставка</dt><dd>0,75%</dd><dt>Банк</dt><dd>Сбербанк</dd></dl></article>
+      <article class="case"><h3>ООО «Союз Маркетинг»</h3><p class="what">Из торговли стройматериалами — в собственное производство сухих строительных смесей.</p>
+        <dl class="num"><dt>Сумма</dt><dd>4 000 000 ₽</dd><dt>Срок</dt><dd>36 мес.</dd><dt>Ставка</dt><dd>1,0%</dd><dt>Банк</dt><dd>Сбербанк</dd></dl></article>
+      <article class="case"><h3>ООО «Восточная торгово-транспортная компания»</h3><p class="what">Торговля и перевозки в Хабаровском крае. Краткосрочное финансирование.</p>
+        <dl class="num"><dt>Сумма</dt><dd>15 000 000 ₽</dd><dt>Срок</dt><dd>12 мес.</dd><dt>Ставка</dt><dd>0,75%</dd><dt>Банк</dt><dd>—</dd></dl></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="news" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Новости и отборы</span><h2>Что происходит в фонде</h2></div>
+      <a class="more" href="#news">Все новости →</a>
+    </div>
+    <div class="news-wrap">
+      <div class="news">
+        <a href="#news"><time class="num"><b>18</b>авг 2026</time><div><span class="pill sel">Отбор</span><h3>Отбор банков для размещения средств фонда</h3><p>Приём заявок с 27 августа по 3 сентября 2026 года.</p></div></a>
+        <a href="#news"><time class="num"><b>23</b>фев 2026</time><div><span class="pill sel">Отбор</span><h3>Отбор банков для размещения средств фонда</h3><p>Приём заявок с 25 февраля по 3 марта 2026 года.</p></div></a>
+        <a href="#news"><time class="num"><b>15</b>дек 2025</time><div><span class="pill">Новость</span><h3>Гарантийному фонду 14 лет</h3><p>Фонд создан в декабре 2011 года при участии Министерства экономического развития края.</p></div></a>
+        <a href="#news"><time class="num"><b>11</b>дек 2025</time><div><span class="pill">СВО</span><h3>Сервисы поддержки для участников СВО и их семей</h3><p>Какие информационные ресурсы о мерах поддержки работают в крае.</p></div></a>
+      </div>
+      <div>
+        <div class="mb" id="about">
+          <h3>Все меры поддержки в одном окне</h3>
+          <p>Фонд входит в центр «Мой бизнес» Хабаровского края. Если не знаете, какая поддержка вам подходит, позвоните в единый справочный центр.</p>
+          <span class="ph num">8 800 555 39 09</span>
+          <ul><li>Поручительства и микрозаймы</li><li>Консультации и обучение</li><li>Поддержка экспорта</li><li>Инвестиции и инновации</li></ul>
+        </div>
+        <div class="side-links">
+          <a href="#about">Отчёты о деятельности <span>→</span></a>
+          <a href="#about">Руководство по финподдержке (PDF) <span>→</span></a>
+          <a href="#contacts">Оценить работу фонда <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="support" style="padding-top:0" aria-label="Поддержка в крае">
+  <div class="wrap">
+    <div class="banners">
+      <a class="bn bn-svo" href="https://xn--27-9kceii5bvbbt1f.xn--p1ai/" target="_blank" rel="noopener">
+        <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Контрактная служба в Хабаровском крае</span>
+        <span class="site">доброволец27.рф</span>
+        <ul><li>Выплаты</li><li>Льготы</li><li>Помощь родственникам военнослужащих</li></ul>
+        <div class="tels num"><span>☎ 117</span><span>☎ 122</span></div>
+        <span class="go">Перейти на сайт</span>
+      </a>
+      <a class="bn bn-guide" href="#about">
+        <span class="eyebrow" style="color:var(--sun)">Справочник</span>
+        <h3>Руководство по получению финансовой поддержки в Хабаровском крае</h3>
+        <p>Какие программы есть в крае, кто их ведёт и как подать заявку.</p>
+        <span class="go">Скачать PDF →</span>
+        <span class="doc" aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="sec-head" style="margin:40px 0 0"><div><span class="eyebrow">Центр «Мой бизнес»</span><h2>Организации в составе ЦОУ</h2></div></div>
+    <div class="orgs">
+      <a class="org" href="https://moibizkhv.ru/contacts/" target="_blank" rel="noopener"><span class="mk" style="background:#6b5b95">КА</span><span><b>Краевое агентство содействия предпринимательству</b><span>moibizkhv.ru</span></span></a>
+      <a class="org" href="https://fond27.ru/" target="_blank" rel="noopener"><span class="mk" style="background:#1f9bd7">ФП</span><span><b>Фонд поддержки малого предпринимательства</b><span>Микрозаймы · fond27.ru</span></span></a>
+      <a class="org" href="https://invest.khv.gov.ru/" target="_blank" rel="noopener"><span class="mk" style="background:#2e8b57">АИ</span><span><b>Агентство привлечения инвестиций и развития инноваций</b><span>invest.khv.gov.ru</span></span></a>
+      <a class="org" href="http://khabexport.com/" target="_blank" rel="noopener"><span class="mk" style="background:#1e4fa0">ЭК</span><span><b>Мой бизнес — продвижение на экспорт</b><span>khabexport.com</span></span></a>
+      <a class="org" href="http://knakbi.ru/" target="_blank" rel="noopener"><span class="mk" style="background:#7a8a93">БИ</span><span><b>Краевой бизнес-инкубатор</b><span>knakbi.ru</span></span></a>
+      <a class="org" href="#top"><span class="mk" style="background:var(--sky)">ГФ</span><span><b>Гарантийный фонд Хабаровского края</b><span>Поручительства · garantfond27.ru</span></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec partners" id="partners">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Партнёрам</span><h2>Для банков, лизинговых компаний и аудиторов</h2></div>
+    </div>
+    <div class="p-grid">
+      <a class="p-card" href="#news"><h3>Размещение средств фонда в депозиты</h3><p>Фонд регулярно проводит отбор банков. Требования к участникам, сроки и форма заявки.</p><span class="go">Условия отбора →</span></a>
+      <a class="p-card" href="#partners"><h3>Отбор банков для участия в программе</h3><p>Как стать партнёром фонда по кредитам, банковским гарантиям, лизингу и займам.</p><span class="go">Порядок отбора →</span></a>
+      <a class="p-card" href="#partners"><h3>Аудиторским организациям</h3><p>Отбор аудиторской организации для проверки годовой отчётности фонда.</p><span class="go">Документы →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq">
+  <div class="wrap faq">
+    <aside>
+      <span class="eyebrow">Вопрос — ответ</span>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);margin-top:6px">Частые вопросы</h2>
+      <p>Не нашли ответ? Напишите нам или позвоните: (4212) 747-393.</p>
+    </aside>
+    <div>
+      <details open><summary>Нужно ли идти в фонд самому?</summary><p>Нет. Вы обращаетесь в банк-партнёр, и если залога не хватает, банк сам направит заявку в фонд. Решение фонд принимает за срок до 3 рабочих дней.</p></details>
+      <details><summary>Какую часть кредита покрывает фонд?</summary><p>До 70% от суммы финансирования, но не больше 100 млн рублей. Срок зависит от продукта и не превышает 10 лет.</p></details>
+      <details><summary>Когда и как платить вознаграждение?</summary><p>В день подписания трёхстороннего договора поручительства. Ставка от 0,25% до 1% годовых от суммы поручительства зависит от категории заёмщика и наличия залога.</p></details>
+      <details><summary>Можно ли получить поручительство по лизингу или займу?</summary><p>Да. Фонд работает с лизинговыми компаниями и микрофинансовыми организациями. Список партнёров есть в разделе «Предпринимателям».</p></details>
+      <details><summary>Я самозанятый. Мне подходит?</summary><p>Да, у фонда есть отдельный продукт для физических лиц на налоге на профессиональный доход.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contacts" style="padding-top:0">
+  <div class="wrap">
+    <div class="contacts">
+      <div class="c-info">
+        <div><span class="eyebrow">Контакты</span><h2 style="margin-top:6px">Приезжайте или позвоните</h2></div>
+        <div class="c-row"><span>Адрес</span><b>680000, г. Хабаровск, ул. Запарина, 51</b></div>
+        <div class="c-row"><span>Телефоны</span><b class="num">(4212) 747-393, 757-393</b></div>
+        <div class="c-row"><span>Справочный центр</span><b class="num">8 800 555 39 09</b></div>
+        <div class="c-row"><span>Почта</span><b><span id="mail">222@garantfond27.ru</span><button type="button" class="copy" id="copy-mail">Копировать</button></b></div>
+        <div class="c-row"><span>Режим работы</span><b>Пн–Пт 9:00–18:00, перерыв 13:00–14:00</b></div>
+        <div class="social">
+          <a href="https://t.me/garantfond27" target="_blank" rel="noopener">Telegram</a>
+          <a href="https://vk.com/garantfond27" target="_blank" rel="noopener">ВКонтакте</a>
+          <a href="https://ok.ru/group/70000001162174" target="_blank" rel="noopener">Одноклассники</a>
+          <a href="https://max.ru/id2721995187_biz" target="_blank" rel="noopener">MAX</a>
+        </div>
+      </div>
+      <a class="map" href="https://yandex.ru/maps/?text=%D0%A5%D0%B0%D0%B1%D0%B0%D1%80%D0%BE%D0%B2%D1%81%D0%BA%2C%20%D1%83%D0%BB.%20%D0%97%D0%B0%D0%BF%D0%B0%D1%80%D0%B8%D0%BD%D0%B0%2C%2051" target="_blank" rel="noopener" aria-label="Открыть на Яндекс Картах">
+        <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g style="fill:none;stroke:var(--surface);stroke-width:14">
+            <path d="M-20 120 L620 70"/><path d="M-20 260 L620 220"/><path d="M140 -20 L190 420"/><path d="M420 -20 L470 420"/>
+          </g>
+          <g style="fill:none;stroke:var(--surface);stroke-width:6;opacity:.7">
+            <path d="M-20 190 L620 145"/><path d="M-20 330 L620 295"/><path d="M290 -20 L330 420"/><path d="M60 -20 L100 420"/><path d="M540 -20 L580 420"/>
+          </g>
+          <path d="M-20 400 C120 360 220 390 320 360 S520 330 620 350 L620 420 L-20 420Z" style="fill:var(--sky);opacity:.25"/>
+        </svg>
+        <span class="pin"><b>ул. Запарина, 51</b><span>Открыть на Яндекс Картах →</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a class="logo" href="#top"><svg aria-hidden="true"><use href="#emblem"/></svg><span class="wm"><span class="l1">Гарантийный</span><span class="l2">фонд</span><span class="l3">Хабаровского края</span></span></a>
+        <p style="margin-top:16px;max-width:30em">Некоммерческая организация. Создана в 2011 году при участии Министерства экономического развития Хабаровского края.</p>
+      </div>
+      <div><h4>Предпринимателям</h4><ul><li><a href="#products">Продукты фонда</a></li><li><a href="#terms">Условия и стоимость</a></li><li><a href="#steps">Порядок получения</a></li><li><a href="#products">Банки-партнёры</a></li></ul></div>
+      <div><h4>Фонд</h4><ul><li><a href="#about">О фонде</a></li><li><a href="#about">Отчёты</a></li><li><a href="#about">Документы</a></li><li><a href="#news">Новости</a></li><li><a href="#faq">Вопрос — ответ</a></li></ul></div>
+      <div><h4>Реквизиты</h4><ul class="num"><li>ИНН 2721995187</li><li>КПП 272101001</li><li>ОГРН 1112700001700</li><li>680000, Хабаровск, ул. Запарина, 51</li></ul></div>
+    </div>
+    <div class="f-bottom"><span>© 2011–2026 Гарантийный фонд Хабаровского края</span><span>Концепт главной страницы</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const rub=v=>v>=1e6?(v/1e6).toLocaleString('ru-RU',{maximumFractionDigits:2})+' млн ₽':Math.round(v).toLocaleString('ru-RU')+' ₽';
+  const months=m=>{const y=Math.floor(m/12),r=m%12;let s='';if(y)s+=y+' '+(y%10==1&&y%100!=11?'год':(y%10>=2&&y%10<=4&&(y%100<10||y%100>=20))?'года':'лет');if(r)s+=(s?' ':'')+r+' мес.';return s};
+  function calc(){
+    const sum=+$('c-sum').value*1e6, share=+$('c-share').value/100, term=+$('c-term').value, rate=+$('c-cat').value/100;
+    $('o-sum').textContent=rub(sum); $('o-share').textContent=Math.round(share*100)+'%'; $('o-term').textContent=months(term);
+    const g=Math.min(sum*share,100e6), y=g*rate;
+    $('r-g').textContent=rub(g); $('r-y').textContent=rub(y); $('r-t').textContent=rub(y*term/12);
+  }
+  ['c-sum','c-share','c-term','c-cat'].forEach(id=>$(id).addEventListener('input',calc));
+  $('calc').addEventListener('submit',e=>e.preventDefault());
+  calc();
+
+  document.querySelectorAll('.a11y button').forEach(b=>b.addEventListener('click',()=>{
+    document.documentElement.style.setProperty('--fs',b.dataset.fs+'px');
+    document.querySelectorAll('.a11y button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    try{localStorage.setItem('gf-fs',b.dataset.fs)}catch(e){}
+  }));
+  try{const f=localStorage.getItem('gf-fs');if(f){const b=document.querySelector('.a11y [data-fs="'+f+'"]');b&&b.click()}}catch(e){}
+
+  $('theme-btn').addEventListener('click',()=>{
+    const r=document.documentElement, cur=r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    r.dataset.theme=cur==='dark'?'light':'dark';
+  });
+
+  $('burger').addEventListener('click',()=>{
+    const o=document.body.classList.toggle('nav-open'); $('burger').setAttribute('aria-expanded',o);
+  });
+  document.querySelectorAll('.mnav a').forEach(a=>a.addEventListener('click',()=>{document.body.classList.remove('nav-open');$('burger').setAttribute('aria-expanded','false')}));
+
+  $('copy-mail').addEventListener('click',()=>{
+    const t=$('mail').textContent, b=$('copy-mail');
+    const done=()=>{b.textContent='Скопировано';setTimeout(()=>b.textContent='Копировать',1500)};
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,()=>{getSelection().selectAllChildren($('mail'))});
+    else getSelection().selectAllChildren($('mail'));
+  });
+})();
+</script>
+</body>
+</html>
