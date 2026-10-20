@@ -110,6 +110,7 @@ nav.main li:hover .drop,nav.main li:focus-within .drop{display:block}
 .burger span::after{position:absolute;top:7px}
 .mnav{display:none;position:fixed;inset:0;z-index:60;background:var(--surface);overflow-y:auto;overscroll-behavior:contain;
   padding-top:env(safe-area-inset-top,0px);padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+header.top .mnav>.wrap{display:block;min-height:0}
 body.nav-open{overflow:hidden}
 body.nav-open .mnav{display:block}
 .mnav-top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:76px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:1}
